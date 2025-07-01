@@ -192,10 +192,27 @@
         );
       }
 
+      function OperationHistory() {
+        return (
+          <Card className="py-10 px-8">
+            <Text as="h1" variant="heading" className="mb-4">
+              Histórico de Operações
+            </Text>
+
+            <ul>
+              <Text as="li">1 + 1 = 2</Text>
+              <Text as="li">2 + 3 + 1 = 6</Text>
+              <Text as="li">2 + 3 = 5</Text>
+            </ul>
+          </Card>
+        );
+      }
+
       function App() {
         return (
           <main className="py-28 px-24">
             <Calculator />
+            <OperationHistory />
           </main>
         );
       }
