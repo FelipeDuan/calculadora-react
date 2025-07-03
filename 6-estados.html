@@ -17,14 +17,34 @@
       function Counter() {
         const [counter, setCounter] = React.useState(0);
 
+        function handleIncrementCounter() {}
+
         return (
           <>
             <p>Contador: {counter}</p>
             <button
-              className="px-2 mt-4 py-1 bg-blue-600 rounded-md cursor-pointer text text-white hover:bg-blue-700 transition-all duration-200"
+              className="px-2 py-1 bg-purple-600 rounded-md cursor-pointer text text-white hover:bg-purple-700 transition-all duration-200"
               onClick={() => setCounter(10)}
             >
               Atualizar
+            </button>
+            <button
+              className="px-2 py-1 bg-green-600 rounded-md cursor-pointer text text-white hover:bg-green-700 transition-all duration-200"
+              onClick={() => setCounter((prev) => prev + 1)}
+            >
+              Incrementar
+            </button>
+            <button
+              className="px-2 py-1 bg-red-600 rounded-md cursor-pointer text text-white hover:bg-red-700 transition-all duration-200"
+              onClick={() => setCounter((prev) => prev - 1)}
+            >
+              Decrementar
+            </button>
+            <button
+              className="px-2 py-1 bg-blue-600 rounded-md cursor-pointer text text-white hover:bg-blue-700 transition-all duration-200"
+              onClick={() => setCounter(0)}
+            >
+              Resetar
             </button>
           </>
         );
@@ -32,7 +52,7 @@
 
       function App() {
         return (
-          <main className="p-3">
+          <main className="p-3 flex flex-col gap-4">
             <Counter />
           </main>
         );
