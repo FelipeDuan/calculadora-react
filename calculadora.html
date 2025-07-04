@@ -77,7 +77,7 @@
         primary: "bg-(--primary)",
       };
 
-      function Button({ className, variant = "default", children }) {
+      function Button({ className, variant = "default", children, ...props }) {
         return (
           <Text
             as="button"
@@ -91,6 +91,7 @@
               ${buttonVariants[variant]}
               ${className ? className : ""}
             `}
+            {...props}
           >
             {children}
           </Text>
@@ -105,7 +106,7 @@
             rounded-2xl
             ${className ? className : ""}
           `}
-            props
+            {...props}
           >
             {children}
           </div>
@@ -168,6 +169,10 @@
       }
 
       function Calculator() {
+        function handleInputClick(input) {
+          console.log(input);
+        }
+
         return (
           <Card
             className={`
@@ -185,6 +190,7 @@
                       key={button.input}
                       className={button.className || `w-16 h-16`}
                       variant={button.variant}
+                      onClick={() => handleInputClick(button.input)}
                     >
                       {button.input}
                     </Button>
