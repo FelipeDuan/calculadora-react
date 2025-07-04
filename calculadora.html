@@ -123,7 +123,7 @@
           { input: "7" },
           { input: "8" },
           { input: "9" },
-          { input: "x", variant: "primary" },
+          { input: "*", variant: "primary" },
         ],
         [
           { input: "4" },
@@ -173,14 +173,50 @@
         const [result, setResult] = React.useState("");
 
         function handleInputClick(input) {
-          if (input === "=") {
-            const operationResult = eval(operation);
-            setResult(operationResult);
+          if (input === "C") {
+            setOperation("");
+            setResult("");
 
             return;
           }
 
-          setOperation(`${operation} ${input}`);
+          if (input === "CE") {
+            setResult("");
+            setOperation(operation.slice(0, -2));
+
+            return;
+          }
+
+          if (input === "=") {
+            const operationResult = eval(operation.replace(/,/g, "."));
+            const parsedResult = operationResult
+              .toString()
+              ?.replace(/\./g, ",");
+            setResult(parsedResult);
+
+            return;
+          }
+
+          if (result) {
+            setOperation(
+              isNaN(input)
+                ? `${result}${input === "," ? "" : " "}${input}`
+                : input
+            );
+            setResult("");
+
+            return;
+          }
+
+          if (input === "," && !operation.endsWith(",")) {
+            setOperation(`${operation},`);
+
+            return;
+          }
+
+          setOperation(
+            `${operation}${operation.endsWith(",") ? "" : " "}${input}`
+          );
         }
 
         return (
