@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estudando ReactJs</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function LiquidGlassButton({ children, onClick }) {
+        return (
+          <button
+            onClick={onClick}
+            className="inline-flex px-4 py-3 justify-center items-center gap-[10px] rounded-lg border border-white/30 bg-white/5 backdrop-blur-md shadow-[-15.107px_-13.709px_48px_-12px_rgba(0,0,0,0.15),-2.518px_-2.285px_12px_-8px_rgba(0,0,0,0.15),2.807px_2.548px_8.92px_0px_rgba(255,255,255,0.11)_inset,1.549px_1.405px_4.46px_0px_rgba(255,255,255,0.11)_inset] transition-all duration-300 ease-in-out hover:bg-white/10 hover:border-white/50 hover:shadow-[-15.107px_-13.709px_58px_-12px_rgba(0,0,0,0.2),-2.518px_-2.285px_18px_-8px_rgba(0,0,0,0.2),2.807px_2.548px_12px_0px_rgba(255,255,255,0.15)_inset,1.549px_1.405px_6px_0px_rgba(255,255,255,0.15)_inset] active:scale-95 active:shadow-[-10px_-10px_40px_-10px_rgba(0,0,0,0.2),-2px_-2px_10px_-6px_rgba(0,0,0,0.2),2px_2px_6px_0px_rgba(255,255,255,0.15)_inset,1px_1px_4px_0px_rgba(255,255,255,0.15)_inset] text-white cursor-pointer font-semibold"
+          >
+            {children}
+          </button>
+        );
+      }
+
+      function ListsNames() {
+        const [names, setNames] = React.useState([
+          "Ana",
+          "Bruno",
+          "Carlos",
+          "Aline",
+          "Felipe",
+          "Luis",
+          "Eduardo",
+        ]);
+
+        const [search, setSearch] = React.useState("");
+
+        return (
+          <>
+            <input
+              type="text"
+              placeholder="Buscar por nome..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            <ul>
+              {names
+                .filter((name) =>
+                  name.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((name, index) => (
+                  <li key={`${index}-${name}`}>{name}</li>
+                ))}
+            </ul>
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <main className="p-3 text-white bg-zinc-900 h-screen">
+            <ListsNames />
+          </main>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
