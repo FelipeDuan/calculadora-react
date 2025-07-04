@@ -123,7 +123,7 @@
           { input: "7" },
           { input: "8" },
           { input: "9" },
-          { input: "X", variant: "primary" },
+          { input: "x", variant: "primary" },
         ],
         [
           { input: "4" },
@@ -155,22 +155,32 @@
             <Text
               as="div"
               variant="muted"
-              className="flex items-center justify-end"
+              className="flex items-center justify-end h-7"
             >
-              {operation}
+              {result && operation}
             </Text>
 
-            <div className={`flex items-center justify-between`}>
+            <div className={`flex items-center justify-between h-9`}>
               <Text variant="muted">=</Text>
-              <Text variant="blast">{result}</Text>
+              <Text variant="blast">{result || operation}</Text>
             </div>
           </div>
         );
       }
 
       function Calculator() {
+        const [operation, setOperation] = React.useState("");
+        const [result, setResult] = React.useState("");
+
         function handleInputClick(input) {
-          console.log(input);
+          if (input === "=") {
+            const operationResult = eval(operation);
+            setResult(operationResult);
+
+            return;
+          }
+
+          setOperation(`${operation} ${input}`);
         }
 
         return (
@@ -180,7 +190,7 @@
             pt-14 px-8 pb-8 
           `}
           >
-            <CalculatorDisplay operation="1 + 1" result="2" />
+            <CalculatorDisplay operation={operation} result={result} />
 
             <div className="flex flex-col gap-3">
               {buttons.map((row, idx) => (
