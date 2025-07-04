@@ -44,9 +44,18 @@
           setCounter(0);
         }
 
+        if (counter > 20) {
+          return <p>Maior que 20</p>;
+        }
+
         return (
           <>
-            <p className="text-white">Contador: {counter}</p>
+            <p>Contador: {counter}</p>
+
+            <p>{counter > 10 ? "Maior que 10" : "Menor que 10"}</p>
+
+            {counter > 15 && <p>Maior que 15</p>}
+
             <div className="flex flex-wrap gap-4 mt-4">
               <LiquidGlassButton onClick={handleUpdateCounter}>
                 Atualizar
@@ -67,7 +76,7 @@
 
       function App() {
         return (
-          <main className="p-3 bg-zinc-900 h-screen">
+          <main className="p-3 text-white bg-zinc-900 h-screen">
             <Counter />
           </main>
         );
